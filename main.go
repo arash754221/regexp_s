@@ -9,7 +9,7 @@ func main() {
 
 	var name string
 
-	fmt.Print("Enter your input: ")
+	fmt.Print("Enter your input and i guess: ")
 	fmt.Scan(&name)
 
 	v := detector.Detector{Input: name}
