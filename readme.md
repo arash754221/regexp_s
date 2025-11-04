@@ -1,4 +1,8 @@
+## welcome to REGEX Practice 
+
+
 detect :
+
     varables  ^[a-zA-Z_][a-zA-Z_0-9]*$
     z-number  ^[0-9]+$
     q-number  ^[0-9]+\.[0-9]+$
