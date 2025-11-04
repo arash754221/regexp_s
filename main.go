@@ -2,66 +2,47 @@ package main
 
 import (
 	"fmt"
-	"s/detector"
+	"regexp"
 )
 
 func main() {
 
-	var name string
-
-	fmt.Print("Enter your input and i guess: ")
-	fmt.Scan(&name)
-
-	v := detector.Detector{Input: name}
-
-	comma := v.Comma()
-	if comma {
-		fmt.Println("Comma(; or ,) detected")
+	Patterns := map[string]string{
+		"^[a-zA-Z_][a-zA-Z_0-9]*$":               "varables",
+		"^[0-9]+$":                               "z - number",
+		`^[0-9]+\.[0-9]+$`:                       "q - number",
+		`^".*"$`:                                 "strings",
+		"^[><=!][=]{0,1}$":                       "Operators",
+		"(^if$|^else$|^for$)":                    "Commands",
+		"(^int$|^float$|^string$|^bool$|^char$)": "Reserved",
+		"^[(){}]{1}$":                            "Bracketes",
+		"(^return$|^break$)":                     "Reserve2",
+		"^[;,]{1}$":                              "Comma",
 	}
 
-	command := v.Commands()
-	if command {
-		fmt.Println("Command (if else for) detected")
-	}
+	for {
+		var input string
 
-	reserved2 := v.Reserve2()
-	if reserved2 {
-		fmt.Println("Reserved (return or break) detected")
-	}
+		fmt.Print("Enter your input and i guess: ")
+		fmt.Scan(&input)
+		y := false
+		for pat, msg := range Patterns {
+			ok, err := regexp.MatchString(pat, input)
+			if err != nil {
+				fmt.Println("🚫 regexp Error")
+			}
 
-	reserved := v.Reserved()
-	if reserved {
-		fmt.Println("Reserved (int fload string bool char) detected")
-	}
+			if ok {
+				fmt.Println("✅ ", msg)
+				y = true
+				break
 
-	operators := v.Operators()
-	if operators {
-		fmt.Println("Operators (> < = <= >= == !=) detected")
-	}
+			}
+		}
 
-	bracket := v.Bracketes()
-	if bracket {
-		fmt.Println("Bracket ( } ) { ( ) detected")
-	}
-
-	Qnumber := v.QNumber()
-	if Qnumber {
-		fmt.Println("decimal number detected")
-	}
-
-	Znumber := v.ZNumber()
-	if Znumber {
-		fmt.Println("integer number detected")
-	}
-
-	variable := v.Variable()
-	if variable {
-		fmt.Println("Variable detected")
-	}
-
-	string := v.Strings()
-	if string {
-		fmt.Println("String detected")
+		if !y {
+			fmt.Printf("‼️ Oops what is this? %s\n", input)
+		}
 	}
 
 }
