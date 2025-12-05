@@ -1,62 +1,26 @@
-## welcome to REGEX Practice 
+## welcome to REGEX Practice
 
 
-detect :
+    1. write your code in input.s file
 
-    varables  ^[a-zA-Z_][a-zA-Z_0-9]*$
-    z-number  ^[0-9]+$
-    q-number  ^[0-9]+\.[0-9]+$
-    strings   ^".*"$
+---
 
-    Operators:
-        <   \<$
-        >   \>$
-        =   \=$
-        <=  \<=$
-        >=  \>=$
-        ==  \==$
-        !=  \!=$
-
-        All: ^[><=!][=]{0,1}$
+    2. fileReader package read the code
+        - read byte of code and pass to tokenizer 
+        - tokenize byte and pass out arrays of streings (tokens)
 
 
-    Commands: 
-        if  if$
-        else  else$
-        for for$
 
-        All:    (^if$|^else$|^for$)
+| 124
 
-    word: 
-        int 
-        fload 
-        string 
-        bool 
-        char
+space 32
 
-        All : (^int$|^float$|^string$|^bool$|^char$)
+new line 10
 
-    terms: 
-    (  \($
 
-    ) :\)$  
-
-    } :\}$ 
-
-    {  :\{$
-
-        All:^[(){}]{1}$
-
-    Reserve2: 
-        return 
-        break
-
-        All : (^return$|^break$)
-
-    term: 
-        ; 
-        ,
-
-        All:    ^[;,]{1}$
-
-    
+make a out put like this:
+|tokens|status|type|
+|-|-|-|
+|a|✅|variable|
+|c|🚫|e|
+|f|g|e|
